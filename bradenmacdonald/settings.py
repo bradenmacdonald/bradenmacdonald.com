@@ -84,6 +84,40 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+# Log to console and email the site admins on any 500 error
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+
+SERVER_EMAIL = LOCAL_SETTINGS.get('SERVER_EMAIL', 'root@localhost')
+EMAIL_HOST = LOCAL_SETTINGS.get('EMAIL_HOST', 'localhost')
+EMAIL_PORT = LOCAL_SETTINGS.get('EMAIL_PORT', 587)
+EMAIL_HOST_USER = LOCAL_SETTINGS.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = LOCAL_SETTINGS.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = LOCAL_SETTINGS.get('EMAIL_USE_TLS', True)
 
 TEMPLATES = [
     {
