@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% load friendly_date %}
+
+{% block content %}
+
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="{% url 'blog_index' %}">Blog</a></li>
+    <li class="active">{{title}}</li>
+  </ul>
+
+  <h1>{{title}}</h1>
+  <h4>{{post_date|friendly_date}}</h4>
+  <br>
+  {{post_body}}
+
+  <div class=row style="margin-top: 2em;">
+    <div class=col-md-6>
+      {% if prev_post %}
+        <a href="{{prev_post.get_absolute_url}}">
+          <i class="fa fa-backward"></i> {{prev_post.title}}
+        </a>
+      {% endif %}
+    </div>
+    <div class=col-md-6 style="text-align: right;">
+      {% if next_post %}
+        <a href="{{next_post.get_absolute_url}}">
+          {{next_post.title}} <i class="fa fa-forward"></i>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class=row style="margin-top: 2em;">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'bradenmacdonald';
+      var disqus_identifier = 'blog-post-{{post_id}}';
+      var disqus_url = 'http://bradenmacdonald.com{% url 'blog_post' year=year slug=slug %}';
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+{% endblock %}

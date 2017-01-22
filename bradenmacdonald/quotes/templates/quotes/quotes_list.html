@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load friendly_date %}
+
+{% block headextra %}
+  {{block.super}}
+  <meta name="description" content="{{meta_desc}}">
+{% endblock %}
+
+{% block content %}
+  <h1>{{header}}</h1>
+
+  {% for q in quotes %}
+    <blockquote class=q>
+      {{q.quote}}
+      <small>
+        {% if q.author %}<strong><a href="{% url 'quotes_author' q.author.id %}">{{q.author.name}}</a></strong>{%else%}Unknown{%endif%}{% if q.source %}, {{q.source_html}} {% endif %}
+      </small>
+    </blockquote>
+  {% endfor %}
+
+  {% if show_back_link %}
+  <br><br><a href="{%url 'quotes_index' %}">&laquo; Back to quotations collection</a>
+  {% endif %}
+{% endblock %}

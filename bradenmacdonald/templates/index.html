@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% load friendly_date %}
+
+{% block headextra %}
+  {{block.super}}
+  <meta name="description" content="Personal website of Braden MacDonald, a Vancouver-based developer.">
+{% endblock %}
+
+{% block content %}
+  <div id="whistlerbg" class="jumbotron">
+    <h1>Braden MacDonald</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+      <h2>Feed</h2>
+      <div class=newsfeed>
+        {% for timestamp, story in feed %}
+          {% if story.type == 'blog' %}
+            <article>
+              <h3>{{story.title}} <small><a href="{{story.permalink}}">Blog post | {{timestamp|friendly_date}}</a></small></h3>
+              {{story.summary}}
+              <a href="{{story.permalink}}" class=permalink>Read more <i class="fa fa-arrow-right"></i></a>
+            </article>
+          {% elif story.type == 'qotd' %}
+            <section>
+              <h3>Quote of the Day <small>{{timestamp|friendly_date}}</small></h3>
+              <blockquote>
+                "If I were forced to sum up in one sentence what the Copenhagen interpretation says to me, it would be 'Shut up and calculate!'"
+                <small><strong>N. David Mermin</strong> in Physics Today, April 1989, page 9</small>
+              </blockquote>
+            </section>
+          {% endif %}
+        {% empty %}
+          <p>No recent updates.</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-3"><a class="twitter-timeline" href="https://twitter.com/BradenMacD" data-widget-id="290700259800260608">Tweets by @BradenMacD</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div>
+  </div>
+{% endblock %}

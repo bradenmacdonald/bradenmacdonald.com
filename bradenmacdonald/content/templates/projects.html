@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block headextra %}
+  {{block.super}}
+  <meta name="description" content="Projects by Braden MacDonald">
+  <style type="text/css">
+    .proj { padding-bottom: 2em; }
+    .proj h3 { font-weight: bold; margin-top: 0.2em; }
+    /* Consistent image sizing, with cropping: */
+    .proj div.img-responsive {
+      width: 100%;
+      position: relative;
+    }
+    .proj div.img-responsive div {
+      background-size: cover;
+      background-position: center center;
+      padding-bottom: 70%;
+    }
+    /* Project tags: */
+    .proj .label { display: inline-block; background-color: #ddd; margin-right: 5px; }
+    .proj .tags:hover .label { background-color: #bbb; }
+    .proj .tags:hover .tag-android { background-color: #A4C639; }
+    .proj .tags:hover .tag-aspnet-mvc { background-color: #F16421; }
+    .proj .tags:hover .tag-c { background-color: #00CC00; }
+    .proj .tags:hover .tag-cpp { background-color: #000; }
+    .proj .tags:hover .tag-cs { background-color: #800020; }
+    .proj .tags:hover .tag-django { background-color: #092E20; }
+    .proj .tags:hover .tag-ios { background-color: #007AFF; }
+    .proj .tags:hover .tag-java { background-color: #F89820; }
+    .proj .tags:hover .tag-javascript { background-color: #AAAA20; }
+    .proj .tags:hover .tag-marmalade { background-color: #333399; }
+    .proj .tags:hover .tag-objective-c { background-color: #DCCC20; }
+    .proj .tags:hover .tag-os-x { background-color: #30AAFF; }
+    .proj .tags:hover .tag-php { background-color: #8892BF; }
+    .proj .tags:hover .tag-python { background-color: #2B5B84; }
+    .proj ul { display: table; margin: 10px 5px 5px 0; padding: 0;}
+    .proj ul li { display: table-row; }
+    .proj ul li span { display: table-cell; }
+    .proj ul li span:first-child { min-width: 3.8em; }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <h1>Selected Projects</h1>
+
+  {% for g in groups %}
+    <h2>{{g.name}}</h2>
+    <div class="row">
+      {% for p in g.projects.all %}
+        <div class="proj col-md-4 col-lg-3 col-sm-6 col-xs-12">
+
+          <div class="img-responsive img-thumbnail">
+            {% if p.url %}<a href="{{p.url}}">{% endif %}
+            <div style="background-image: url('{% if p.image %}{{p.image.url}}{% else %}http://placehold.it/500x350{% endif %}');"></div>
+            {% if p.url %}</a>{% endif %}
+          </div>
+
+          <h3>{% if p.url %}<a href="{{p.url}}">{{p.name}}</a>{% else %}{{p.name}}{% endif %}</h3>
+          {% if p.description %}<p>{{p.description|safe}}</p>{% endif %}
+          <ul>
+            {% if p.year %}<li><span>Active:</span> <span>{{p.year_range_str}}</span></li>{% endif %}
+            {% if p.role %}<li><span>Role:</span> <span>{{p.role}}</span></li>{% endif %}
+            {% if p.source_url %}<li><span>Source:</span> <span><a href="{{p.source_url}}">{% if p.source_url_is_github %}<i class="fa fa-lg fa-github"></i> {%endif%}{{p.source_desc}}</a></span></li>{% endif %}
+          </ul>
+          <div class="tags">
+            {% for t in p.tags %}<span class="label tag-{{t.tag_slug}}">{{t.tag}}</span>{% endfor %}
+          </div>
+        </div>
+
+        {% if forloop.counter|divisibleby:2 %}<div class="clearfix visible-sm"></div>{%endif%}
+        {% if forloop.counter|divisibleby:3 %}<div class="clearfix visible-md"></div>{%endif%}
+        {% if forloop.counter|divisibleby:4 %}<div class="clearfix visible-lg"></div>{%endif%}
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+{% endblock %}

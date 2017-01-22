@@ -1,0 +1,69 @@
+@import "bootstrap/less/variables.less";
+
+//@font-family-sans-serif:  Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+@headings-font-family: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+#wrap > header {
+  font-family: @headings-font-family;
+}
+
+@import "bootstrap/less/bootstrap.less";
+
+header .navbar-right {
+  a { padding-top: 0; padding-bottom: 0; line-height: 50px; }
+  i.fa-lg { font-size: 35px; vertical-align: -25%; }
+}
+@media(max-width: @screen-xs-max) {
+  .navbar-right li {
+    width: 25%;
+    float: left;
+    text-align: center;
+    span.visible-xs { display: inline!important; }
+  }
+}
+
+footer {
+  position: relative;
+  margin-top: -52px;
+  height: 52px;
+  clear: both;
+  padding-top: 0;
+  p { line-height: 50px; margin-bottom: 0; float: right!important; }
+}
+// push the footer to the bottom:
+html, body { height:100%; }
+#wrap { min-height: 100%;  }
+#wrap > .container { overflow:auto; padding-top: 60px; padding-bottom:70px; }
+
+
+.jumbotron#whistlerbg {
+  background-size: cover;
+  background-position-y: center;
+  background-image: url("http://static.bradenm.com/hero-whistler-landscapes-by-coachy.jpg");
+  @media (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+    background-image: url("http://static.bradenm.com/hero-whistler-landscapes-by-coachy2x.jpg");
+  }
+  h1 { color: white; text-shadow: 0 0 6px black; }
+}
+
+// Home page newsfeed:
+
+.newsfeed { 
+  article {
+    h3 small a { color: inherit; }
+    a.permalink { display: block; }
+  }
+}
+
+// Misc styles for page content:
+.img.img-right {
+  clear: right;
+  float: right;
+  margin-left: 15px;
+  max-width: 30%;
+}
+
+// Quotes collection page:
+blockquote.q small a {
+  color: inherit;
+}

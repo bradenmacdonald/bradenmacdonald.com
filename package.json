@@ -1,0 +1,9 @@
+{
+  "name": "bradenmacdonald",
+  "version": "0.2.0",
+  "description": "The bradenmacdonald.com website",
+  "dependencies": {
+    "less": "1.5.0",
+    "recess": "1.1.9"
+  }
+}

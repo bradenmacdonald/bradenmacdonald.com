@@ -1,0 +1,9 @@
+Pillow==4.0.0
+psycopg2==2.6.1
+django_redis==4.6.0
+PyYAML==3.11
+
+django>=1.10,<1.10.99
+django-compressor==2.1
+
+-e .
