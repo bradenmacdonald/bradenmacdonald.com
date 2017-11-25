@@ -9,6 +9,9 @@ import yaml
 LOCAL_SETTINGS = """
 DATABASE:
     NAME: bradenmacdonald
+    HOST: localhost
+    USER: bradenmacdonald
+    PASSWORD: devpassword
 DEBUG: false
 SECRET_KEY:
 # Cache setting - set to a string prefix to enable redis cache use:
