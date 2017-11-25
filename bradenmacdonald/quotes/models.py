@@ -7,9 +7,9 @@ from django.utils.safestring import mark_safe
 class Author(models.Model):
     name = models.CharField(max_length=128)
     description = models.CharField(blank=True, max_length=512)
-    wikipedia_bio = models.CharField(max_length=128)
+    wikipedia_bio = models.CharField(max_length=128, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}".format(self.name)
 
     @property
@@ -45,7 +45,7 @@ class Quote(models.Model):
         html = re.sub(r'(?<!\w)\*(?P<text>.+?)\*(?!\w)', r'<em>\g<text></em>', html)
         return mark_safe(html)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.short_quote
 
     class Meta:
