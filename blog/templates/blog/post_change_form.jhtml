@@ -10,9 +10,9 @@
 {{ block.super }}
 	{% if object_id %}
         {% if not original.posted %}
-            <li><a href="publish/" class="addlink">Publish</a></li>
+            <li><a href="../publish/" class="addlink">Publish</a></li>
         {% else %}
-            <li><a href="unpublish/">Un-Publish</a></li>
+            <li><a href="../unpublish/">Un-Publish</a></li>
         {% endif %}
     {% endif %}
 {% endblock %}
