@@ -21,7 +21,7 @@ class BasicPage(models.Model):
         for f in ('title', 'description', 'content', 'extra_js', 'extra_css',):
             self.__dict__[f] = getattr(self, f).strip()
 
-    def __unicode__(self):
+    def __str__(self):
         return u'/{} : {}'.format(self.path, self.title)
 
     def get_absolute_url(self):
@@ -32,7 +32,8 @@ class BasicPage(models.Model):
 class ProjectGroup(models.Model):
     name = models.CharField(max_length=128)
     order = models.IntegerField(null=False, default=5)
-    def __unicode__(self):
+
+    def __str__(self):
         return self.name
 
 class Project(models.Model):
@@ -77,5 +78,5 @@ class Project(models.Model):
     def source_url_is_github(self):
         return 'github.com' in self.source_url
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

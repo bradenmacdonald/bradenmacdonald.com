@@ -22,5 +22,5 @@ class Post(models.Model):
     class Meta:
         ordering = ("-posted",)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title if self.title else u"Untitled Entry"
