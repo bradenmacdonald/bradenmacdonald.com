@@ -24,9 +24,9 @@ ALLOWED_HOSTS:
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 
 # Update LOCAL_SETTINGS:
-LOCAL_SETTINGS = yaml.load(LOCAL_SETTINGS)
+LOCAL_SETTINGS = yaml.load(LOCAL_SETTINGS, Loader=yaml.SafeLoader)
 with open(PROJECT_ROOT + "/private.yml") as fh:
-    LOCAL_SETTINGS.update(yaml.load(fh.read()))
+    LOCAL_SETTINGS.update(yaml.load(fh.read(), Loader=yaml.SafeLoader))
 
 SECRET_KEY = LOCAL_SETTINGS['SECRET_KEY']
 DEBUG = LOCAL_SETTINGS['DEBUG']
